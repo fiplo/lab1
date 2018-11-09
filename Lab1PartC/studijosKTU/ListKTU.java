@@ -10,7 +10,7 @@
  *****************************************************************************
  */
 package studijosKTU;
-
+import java.util.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -34,8 +34,7 @@ public class ListKTU<E extends Comparable<E>>
 	public ListKTU() {
 	}
     
-    @Override
-    public addLast(E e)
+    public void addLast(E e)
     {
         Node<E> temp = new Node<>(e, null);
         last = new Node<>(last.element, temp);
@@ -87,14 +86,43 @@ public class ListKTU<E extends Comparable<E>>
             return true;
         }
 	    current = first.findNode(k-1);
-        Node<E> temp = new Node<>(e, current.getNext());
+        Node<E> temp = new Node<>(e, current.next);
         current = new Node<>(current.element, temp);
         size++;
         return true;
 	}
-    public removeLastOccurance{Object o}
+    public boolean removeLastOccurance(Object o)
     {
-
+        if(first == null)
+            return false;
+        if(first.element == o || first.next == null)
+        {
+            first = null;
+            size--;
+            return true;
+            
+        }
+        Node<E> temp = null;
+        current = first;
+        if(current.element == o)
+            temp = current;
+        while(current.next != null)
+        {
+            if(current.next.element == o)
+                temp = current.next; 
+            current = current.next;
+        }
+        if(temp == first)
+        {
+            first = first.next;
+            size--;
+            return true;
+        }
+        if(temp == null)
+            return false;
+        current.next = current.next.next;
+        size--;
+        return true;
     }
 	/**
 	 *
@@ -156,9 +184,11 @@ public class ListKTU<E extends Comparable<E>>
         if(k == size)
             last = new Node<>(e, null);
         if(k == 0)
-            first = new Node<>(e, first.getNext());
+            first = new Node<>(e, first.next);
         current = first.findNode(k-1);
-        current.getNext() = new Node<>(e, current.getNext().getNext());
+        E temp = current.next.element;
+        current.next = new Node<>(e, current.next.next);
+        return temp;
 	}
 
 	/**
@@ -186,25 +216,44 @@ public class ListKTU<E extends Comparable<E>>
 	 */
 	@Override
 	public E remove(int k) {
-        if(k < 0 || k > size)
+        E temp;
+        if(k < 0 || k >= size)
             return null;
-        if(k = size)
+        if(k == size - 1)
         {
             current = first.findNode(k-1);
+            temp = last.element;
             current = new Node<>(current.element, null);
             last = current;
             size--;
-            return current;
+            return temp;
         }
-        if(k = 0)
+        if(k == 0)
         {
-            first = first.getNext();
+            temp = first.element;
+            first = first.next;
             size--;
+            return temp;
         }
         current = first.findNode(k-1);
-        current = new Node<>(current.element, current.getNext().getNexT());
+        temp = current.next.element;
+        current = new Node<>(current.element, current.next.next);
         size--;
+        return temp;
 	}
+    public ListKTU<E> subList(int fromIndex, int toIndex)
+    {
+        if(fromIndex > toIndex || fromIndex > size || toIndex > size || fromIndex < 0 || toIndex <0)
+            return null;
+        ListKTU<E> output = new ListKTU<E>();
+        current = first.findNode(fromIndex);
+        for(int i=0; i<toIndex; i++)
+        {
+            output.add(current.element);
+            current = current.next;
+        }
+        return output;
+    }
 
 	/**
 	 *

@@ -1,0 +1,28 @@
+Every file parsed by this program is broken up into tokens. Each token is one of
+the following:
+
+	1. An Alphanumeric string with underscores.
+	2. A number (either integer or floating point).
+	3. A string between double quotes.
+	4. Any character that is not white space, a letter or digit.
+
+A consequence of this is that white space becomes insignificant when it comes to
+parsing a data file.
+
+Resident file format:
+
+	(lastName ',' adress (',' month ',' code ',' amount)+ ';')*
+
+	lastName 	- string (either between quotes or as a single word).
+	adress 		- same as last name.
+	month 		- integer between 1 and 12 inclusive.
+	code 		- integer
+	amont 		- real number.
+
+Utility file format:
+
+	(code ',' name ',' monthlyPrice ';')*
+
+	code 		- integer
+	name 		- string (either integer or between double quotes)
+	monthlyPrice 	- real number
