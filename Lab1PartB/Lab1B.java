@@ -39,6 +39,6 @@ public class Lab1B {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       new graphics(30, 30);
+        new graphics(30, 50);
     }
 }
