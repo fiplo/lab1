@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Lab1PartB;
 import java.awt.Color;
 import static java.awt.Color.*;
@@ -15,7 +10,7 @@ import java.net.URLConnection;
 import java.util.regex.*;
 /**
  *
- * @author fiplo
+ * @author Paulius Ratkevičius, KTU IFF-7/12, Fri 09 Nov 2018 04:29:10 AM EET
  */
 public class Lab1B {
     public static String RandomWord()

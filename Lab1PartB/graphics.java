@@ -6,7 +6,8 @@ import java.awt.GraphicsEnvironment;
 import java.util.Random;
 import studijosKTU.ScreenKTU;
 import java.awt.event.MouseEvent;
-
+import java.lang.StringBuilder;
+import java.util.*;
 public class graphics extends ScreenKTU {
     static private final Fonts demofont = Fonts.boldC;
     ScreenKTU sc;
@@ -18,7 +19,7 @@ public class graphics extends ScreenKTU {
     int answered;
 
     public graphics(int xsize, int ysize) {
-        super(18, 18, xsize, ysize, demofont, Grid.OFF);
+        super(20, 20, xsize, ysize, demofont, Grid.OFF);
         Xsize = xsize;
         Ysize = ysize;
         Color1 = new Color(0xE5989B);
@@ -36,6 +37,7 @@ public class graphics extends ScreenKTU {
         String word = FindNewWord();
         correctAns = word.toCharArray();
         String keyboard = GenerateKeyboard(20, word);
+        keyboard = ShuffleString(keyboard);
         Keyboard = keyboard;
         PrintKeyboard(20, keyboard);
         refresh();
@@ -81,20 +83,26 @@ public class graphics extends ScreenKTU {
     public String GenerateKeyboard(int MaxKeys, String zodis)
     {
         String chars = "aąbcčdeęėfghiįyjklmnoprsštuųūvzž";
-        String keyboard = new String();
-        keyboard += zodis;
+        Set set = new HashSet(); 
+        StringBuilder keyboard = new StringBuilder();
+        for(int i=0; i<zodis.length(); i++)
+        {
+            if(!set.contains(zodis.charAt(i)))
+            {
+                set.add(zodis.charAt(i));
+                keyboard.append(zodis.charAt(i));
+            }
+        }
         Random selector = new Random();
-        for(int i=zodis.length(); i < MaxKeys; i++){
-            boolean found = false;
-            while(!found){
-                char randomChar =  chars.charAt(selector.nextInt(keyboard.length()-1));
-                if(keyboard.indexOf(randomChar) == -1){
-                    keyboard += randomChar;
-                    found = true;
-                }
+        for(int i=keyboard.length(); i < MaxKeys;){
+            char randomChar =  chars.charAt(selector.nextInt(keyboard.length()-1));
+            if(!set.contains(randomChar)){
+                keyboard.append(randomChar);
+                set.add(randomChar);
+                i++;
             }
        }
-       return keyboard;
+       return keyboard.toString();
     }
     public void PrintKeyboard(int MaxKeys, String keyboard)
     {
@@ -122,8 +130,8 @@ public class graphics extends ScreenKTU {
          int X = e.getX();
          int Ykb = (e.getX()/cellW -25+2)/3+5;
          int Xkb = (e.getY()/cellH-5-10)/3;
-         System.out.println(Xkb);
-         System.out.println(Ykb);
+         System.out.println(X);
+         System.out.println(Y);
          if(Xkb >= 0 && Xkb < 2 && Ykb >= 0 && Ykb < 10 )
          {
             System.out.println(Keyboard.charAt(Xkb*10+Ykb));
@@ -170,6 +178,15 @@ public class graphics extends ScreenKTU {
         {
            print(Xsize/8*7-2, i+Ysize/2-zodis.length/2, zodis[i]);
         }         
+    }
+    public String ShuffleString(String target)
+    {
+        String output = new String();
+        List<String> temp = Arrays.asList(target.split(""));
+        Collections.shuffle(temp);
+        for(String letter : temp)
+            output += letter;
+        return output;
     }
 
 }
