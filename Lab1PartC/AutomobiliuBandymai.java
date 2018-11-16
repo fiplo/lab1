@@ -17,10 +17,10 @@ public class AutomobiliuBandymai{
     void metodoParinkimas(){
         tikrintiAtskirusAuto();
         formuotiAutoSąrašą();
-        peržiūrėtiSąrašą();
-        papildytiSąrašą();
-        patikrintiTurgausApskaitą();
-        patikrintiRikiavimą();
+        //peržiūrėtiSąrašą();
+        //papildytiSąrašą();
+        //patikrintiTurgausApskaitą();
+        //patikrintiRikiavimą();
     }
     
 
@@ -55,18 +55,18 @@ public class AutomobiliuBandymai{
         bandomieji.add(a2);
         bandomieji.add(a3);
         bandomieji.println("Pirmi 3 auto");
-        bandomieji.set(3, "Renault Laguna 2001 115900 7500");
+        bandomieji.set(3, a2);
         bandomieji.remove(2);
         bandomieji.add("Honda   Civic  2007  36400 8500,3");
         bandomieji.println("Visi 6 auto");
-        bandomieji.subList(1,3).forEach(System.out::println);
+      //  bandomieji.subList(1,3).forEach(System.out::println);
         Ks.oun("Pirmų 3 auto ridos vidurkis= "+
                 (bandomieji.get(0).getRida()+bandomieji.get(1).getRida()+
                  bandomieji.get(2).getRida())/3);
         
-        Ks.oun("Kitų 3 auto kainų suma= "+
-                (bandomieji.get(3).getKaina()+bandomieji.get(4).getKaina()+
-                 bandomieji.get(5).getKaina()));
+        //Ks.oun("Kitų 3 auto kainų suma= "+
+        //        (bandomieji.get(3).getKaina()+bandomieji.get(4).getKaina()+
+        //         bandomieji.get(5).getKaina()));
         // palaipsniui atidenkite sekančias eilutes ir išbandykite
         bandomieji.add(0, new Automobilis("Mazda","6",2007,50000,27000));
 //        bandomieji.add(6, new Automobilis("Hyundai","Lantra",1998,9500,777));

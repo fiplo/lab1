@@ -53,7 +53,7 @@ public class ListKTU<E extends Comparable<E>>
 			return false;   // nuliniai objektai nepriimami
 		}
 		if (first == null) {
-			first = new Node<>(e, first);
+			first = new Node<>(e, null);
 			last = first;
 		} else {
 			Node<E> e1 = new Node(e, null);
@@ -181,7 +181,7 @@ public class ListKTU<E extends Comparable<E>>
         if (k < 0 || k >= size) {
 			return null;
 		}  
-        if(k == size)
+        if(k == size-1)
             last = new Node<>(e, null);
         if(k == 0)
             first = new Node<>(e, first.next);
@@ -243,13 +243,14 @@ public class ListKTU<E extends Comparable<E>>
 	}
     public ListKTU<E> subList(int fromIndex, int toIndex)
     {
-        if(fromIndex > toIndex || fromIndex > size || toIndex > size || fromIndex < 0 || toIndex <0)
-            return null;
+        /*if(fromIndex > toIndex || fromIndex > size || toIndex > size || fromIndex < 0 || toIndex <0)
+            return null;*/
         ListKTU<E> output = new ListKTU<E>();
         current = first.findNode(fromIndex);
         for(int i=0; i<toIndex; i++)
         {
-            output.add(current.element);
+            if(current.element != null)
+                output.add(current.element);
             current = current.next;
         }
         return output;
