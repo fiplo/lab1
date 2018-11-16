@@ -34,6 +34,13 @@ public class Lab1B {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new graphics(30, 50);
+        Color Color1 = new Color(0xE5989B);
+        Color Color2 = new Color(0x6D6875);
+        Color Color3 = new Color(0xFFEBE7);
+        Color Color4 = new Color(0xFFB4A2);
+        Color Color5 = new Color(0xFFCDB2);
+        Color Color6 = new Color(0xFCE9E5);
+ 
+        new graphics(30, 50, Color1, Color2, Color3, Color4, Color5, Color6);
     }
 }
